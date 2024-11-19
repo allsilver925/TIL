@@ -2,6 +2,7 @@
 
 
 ### Python
+[1.DJango](https://github.com/allsilver925/TIL/blob/main/DJango.md)
 
 <br>
 <br>
