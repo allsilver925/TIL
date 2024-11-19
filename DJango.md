@@ -1,8 +1,8 @@
 ## DJango
 
-#### MTV (Model - Template - View)
+### MTV (Model - Template - View)
 
-##### Model
+#### Model
 * 마이그레이션 했을 때, DB생성 시 자동적으로 ID필드(Integer Field)가 생성됨
 <br>
 
