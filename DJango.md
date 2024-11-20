@@ -38,3 +38,16 @@
         <p>{{ feed.content }}</p>  # 이때, <p>도 반복됨
     {% endfor %}
   ```
+
+* Javascript나 jQuery는 화면에서 액션을 취했을때 어떤 동적 반응이 나오도록 해주는 작업
+  ```
+    $('.CLASS / $ID').click()      # 클래스 일 때는 .class, 아이디일때는 $id
+  ```
+
+* Javascript나 jQuery에서는 ;(세미콜론)을 써도되고 안써도 됨. (통일할 것)
+
+* body를 가져오는 방법은 ``` $(document.body)  ```
+
+* ```e.stopPropagation();```은 해당 이벤트가 상위(부모)엘리먼트에게 전달되지 않도록 막아주는 함수
+  
+* ```e.preventDefault();```은 해당 함수의 고유한 동작이 실행되지 않도록 막아주는 함수
