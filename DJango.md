@@ -28,6 +28,17 @@
 
 <br>
 
+* view.py에서 정의한 클래스는 urls.py에 import하고 패턴에 경로 등록해주어야 사용할 수 있음
+  - 이때, post방식으로 전달하는 클래스의 경우에는 경로 마지막 '/'를 빼주어야 함.
+ 
+<br>
+
+* 보통 이미지나 파일은 각각에 해당하는 서버에 저장하지만, 현재 프로젝트에서는 Django의 media라는 폴더에 저장할 것임
+  - https://wayhome25.github.io/django/2017/05/10/media-file/ 참고
+  - 
+
+<br>
+
 #### Template
 * {{ }}로 template에서 데이터를 view로부터 불러옴
   <br>
