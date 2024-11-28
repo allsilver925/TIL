@@ -1,5 +1,9 @@
 ## DJango
 
+### manage.ty
+* 장고를 띄우거나 장고 DB를 만들거나 모델에서 객체를 만들거나 DB 마이그레이션 할 때 사용하는 소스
+
+
 ### MTV (Model - Template - View)
 
 #### Model
@@ -35,7 +39,16 @@
 
 * 보통 이미지나 파일은 각각에 해당하는 서버에 저장하지만, 현재 프로젝트에서는 Django의 media라는 폴더에 저장할 것임
   - https://wayhome25.github.io/django/2017/05/10/media-file/ 참고
-  - 
+<br>
+
+* 파일을 저장할 때 사용하는 코드<br>
+
+  ```
+  with open(save_path, 'wb+') as destination:
+        for chunk in file.chunks():
+        destination.write(chunk)
+  ```
+  - save_path에 저장할 경로를 넣고 file을 넣은 변수를 for문에 넣음
 
 <br>
 
