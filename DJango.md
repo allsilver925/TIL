@@ -48,7 +48,11 @@
         for chunk in file.chunks():
         destination.write(chunk)
   ```
-  - save_path에 저장할 경로를 넣고 file을 넣은 변수를 for문에 넣음
+  - save_path에 저장할 경로를 넣고 file을 넣은 변수를 for문에 넣음 <br>
+
+* ajax를 통해 전달받은 데이터는 처리 후 return Response(state=200)으로 응답 리턴
+
+
 
 <br>
 
@@ -66,6 +70,27 @@
 * Javascript나 jQuery는 화면에서 액션을 취했을때 어떤 동적 반응이 나오도록 해주는 작업
   ```
     $('.CLASS / $ID').click()      # 클래스 일 때는 .class, 아이디일때는 $id
+  ```
+
+* $.ajax를 통해서 브라우저에서 담은 데이터들을 서버로 보냄
+  ```
+  $.ajax({
+    url:  urls.py에 urlpatterns에 적힌 경로를 통해 해당 클래스에 데이터가 전달됨,
+    data:  전송할 데이터,
+    method:  get / post 타입,
+    processData:  false,
+    contentType:  false,
+    success: function(data){
+        ajax가 담긴 이벤트의 액션이 일어나고, 그 결과가 성공시 실행되는 콜백함수
+    },
+    error: function(request, status, error){
+        ajax가 담긴 이벤트의 액션이 일어나고, 그 결과가 성공시 실행되는 콜백함수
+    },
+    complete: function(){
+        location.replace("/main/"); {#함수 완료되고 메인으로 돌아감#}
+        ajax가 담긴 이벤트의 액션이 일어나고, 그 결과가 성공이든 실패든 실행되는 함수
+    }
+  })
   ```
 
 * Javascript나 jQuery에서는 ;(세미콜론)을 써도되고 안써도 됨. (통일할 것)
