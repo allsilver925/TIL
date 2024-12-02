@@ -1,13 +1,24 @@
 ## DJango
 
-### manage.ty
+### manage.py
 * 장고를 띄우거나 장고 DB를 만들거나 모델에서 객체를 만들거나 DB 마이그레이션 할 때 사용하는 소스
+  ```
+  >> python3 managy.py makemigrations
+
+  >> python3 managy.py migrate
+  ```
 
 
 ### MTV (Model - Template - View)
 
 #### Model
 * 마이그레이션 했을 때, DB생성 시 자동적으로 ID필드(Integer Field)가 생성됨
+
+* 장고에서 제공하는 auth_user모델이 있음. but, 추가적인 커스텀이 필요할 경우, 상속받아서 만들 수 있음(AbstractBaseUser)
+  - 기존 auth_user모델 무시하고 새로 만들 수도 있지만, 기본 auth_user모델에서 제공하는 암호화, 필수 함수 등을 새롭게 만들어야 함.
+    만일, 새롭게 커스텀 유저모델을 만들려면 최초 마이그레이션 전에 user 먼저 결정하고 만드는 게 좋음
+    settings.py에 ```AUTH_USER_MODEL = 'customUser.User'``` 작성해야, 기본 모델이 아닌 내 커스텀모델 사용할 수 있음.
+  
 <br>
 
 * 이미지나 파일을 경로로 DB에 넣는 이유?
