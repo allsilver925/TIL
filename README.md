@@ -2,7 +2,7 @@
 
 
 ### Python
-[1.DJango](https://github.com/allsilver925/TIL/blob/main/DJango.md)
+[1. DJango](https://github.com/allsilver925/TIL/blob/main/DJango.md)
 
 <br>
 <br>
@@ -10,8 +10,8 @@
 
 
 ### Data Analysis
-[1.Extended Kalman Filter(EKF)](https://github.com/allsilver925/TIL/blob/main/EKF.md)
-[2.AWS_S3](https://github.com/allsilver925/TIL/blob/main/AWS S3.md)
+[1. Extended Kalman Filter(EKF)](https://github.com/allsilver925/TIL/blob/main/EKF.md)<br>
+[2. AWS S3](https://github.com/allsilver925/TIL/blob/main/AWS%20S3.md)
 <br>
 <br>
 <br>
