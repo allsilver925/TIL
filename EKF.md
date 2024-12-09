@@ -82,3 +82,48 @@ for z in measurements:
 
 ```
 
+
+
+
+
+
+MATLAB을 이용한 칼만필터 적용으로 SOC 추정하는 코드(C > Python)
+
+
+2. 다양한 입력값의 특수 케이스를 처리하면서 정확하고 안정적인 승수 연산을 수행하는 코드
+```
+def rt_powd_snf(u0, u1):
+    if math.isnan(u0) or math.isnan(u1):
+        return float('nan')  # NaN 처리
+
+    tmp = abs(u0)   # base의 절대값
+    tmp_0 = abs(u1) # exponent의 절대값
+
+    # 무한대 exponent 처리
+    if math.isinf(u1):
+        if tmp == 1.0:
+            return 1.0  # 1^Inf = 1
+        elif tmp > 1.0:
+            return float('inf') if u1 > 0.0 else 0.0  # 큰 base: Inf 또는 0
+        else:
+            return 0.0 if u1 > 0.0 else float('inf')  # 작은 base: 0 또는 Inf
+
+    if tmp_0 == 0.0:        # exponent가 0인 경우
+        return 1.0          # x^0 = 1
+
+    if tmp_0 == 1.0:        # exponent가 1인 경우
+        return u0 if u1 > 0.0 else 1.0 / u0  # x^1 또는 1/x
+    
+    if u1 == 2.0:               # exponent가 2인 경우
+        return u0 * u0  # x^2
+    
+    if u1 == 0.5 and u0 >= 0.0:     # exponent가 0.5인 경우
+        return math.sqrt(u0)  # x^(1/2)
+    
+    if u0 < 0.0 and u1 > math.floor(u1):        # base가 음수이고 exponent가 정수가 아닌 경우
+        return float('nan')  # 음수 base의 비정수 승
+    
+    return math.pow(u0, u1)     # 기본적으로 math.pow 사용
+
+```
+
