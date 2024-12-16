@@ -125,5 +125,21 @@ def rt_powd_snf(u0, u1):
     
     return math.pow(u0, u1)     # 기본적으로 math.pow 사용
 
+
+
+def extended_kalman_filter(z, x, P):
+    # 예측 단계
+    x_pred = f(x)
+    F = jacobian_f(x)
+    P_pred = F @ P @ F.T + Q
+
+    # 업데이트 단계
+    H = jacobian_h(x_pred)
+    K = P_pred @ H.T @ np.linalg.inv(H @ P_pred @ H.T + R)
+    x_upd = x_pred + K @ (z - h(x_pred))
+    P_upd = (np.eye(len(x)) - K @ H) @ P_pred
+
+    return x_upd, P_upd
+
 ```
 
