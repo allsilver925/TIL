@@ -139,6 +139,27 @@ def extended_kalman_filter(z, x, P):
     x_upd = x_pred + K @ (z - h(x_pred))
     P_upd = (np.eye(len(x)) - K @ H) @ P_pred
 
+
+def look1_binlxpw(u0, bp0, table, maxIndex):
+    if u0 <= bp0[0]:
+        iLeft = 0
+        frac = (u0 - bp0[0]) / (bp0[1] - bp0[0])
+    elif u0 < bp0[maxIndex]:
+        # Binary search
+        iLeft, iRght = 0, maxIndex
+        while iRght - iLeft > 1:
+            bpIdx = (iRght + iLeft) // 2
+            if u0 < bp0[bpIdx]:
+                iRght = bpIdx
+            else:
+                iLeft = bpIdx
+        frac = (u0 - bp0[iLeft]) / (bp0[iLeft + 1] - bp0[iLeft])
+    else:
+        iLeft = maxIndex - 1
+        frac = (u0 - bp0[maxIndex - 1]) / (bp0[maxIndex] - bp0[maxIndex - 1])
+
+    return (table[iLeft + 1] - table[iLeft]) * frac + table[iLeft]
+
     return x_upd, P_upd
 
 ```
