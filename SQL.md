@@ -29,6 +29,7 @@
 
 ``` [WHERE 조건식] ```
 * WHERE절은 데이터를 추출하는 선택 조건식을 지정. 단일식을 이용하는 것 외에도 여러조건을 조회하는 경우도 많음. 테이블 간 결합시 결합관계를 지정함. WHERE절에서는 그룹함수(AVG,MAX,MIN,SUM,COUNT)를 사용할 수 없음
+* Null값을 찾거나 제외하려면 IS NULL / IS NOT NULL을 써주어야 함
 
 ``` [GROUP BY 컬럼명 [HAVING 조건식]] ```
 * GROUP BY절은 그룹화 열(컬럼)명을 포함하는 식을 지정. alias는 사용할 수 없고, GROUP BY절에 사용되는 컬럼이 아니어도 SELECT절에 사용되는 컬럼을 같이 작성해주어야 함.
