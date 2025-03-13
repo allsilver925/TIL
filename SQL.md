@@ -11,6 +11,9 @@
  ORDER BY 컬럼명[,컬럼명...]
 ```
 
+### SELECT 쿼리문의 실행 순서
+> FROM - ON - JOIN - WHERE - GROUP BY - HAVING - SELECT - DISTINCT - ORDER BY <br>
+
 ### SELECT : 테이블에서 데이터를 추출하는 DML중 하나
 ```  SELECT [ALL | DISTINCT] 컬럼명 [,컬럼명...] ```
 * SELECT절은 SELECT문에서 필수 구성되는 절로 지정 열을 설명하는 것. ``` SELECT * ```로 하면 모든 열이 표시됨.
