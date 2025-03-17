@@ -55,6 +55,62 @@
 * FROM절 서브쿼리(인라인뷰) : 서브쿼리가 FROM절에서 사용되면 뷰처럼 결과가 동적으로 생성된 테이블로 사용할 수 있음(데이터베이스에는 저장되지 않음), 인라인뷰로 생성된 테이블이기 때문에 인라인뷰의 칼럼은 자유롭게 참조가 가능함.
   ```SELECT 컬럼명 FROM 테이블명, (SELECT 컬럼명 FROM 테이블명 WHERE 조건식..) WHERE 조건식... ```
 * WHERE절 서브쿼리 :```SELECT 컬럼명 FROM 테이블명 WHERE 조건식 and (SELECT 컬럼명 FROM 테이블명 WHERE 조건식...)...```
+<br><br>
+##### 순위를 구하는 함수 (Over절과 같이 쓰임)
+```
+  SELECT 컬럼명1, 컬럼명2, RANK() OVER(PARTITION BY 컬럼명2 ORDER BY 컬럼명1 DESC) AS rank
+  FROM 테이블명
+  WHERE 조건식
+```
+* Rank() : 중복 순위 번호는 건너뛰고 다음 순위 값을 표시 ex. 1,1,3,4,5..
+  - Order by를 Over절에 사용하여 상세 순위를 부여할 수 있고, Select절에 사용하지않아도 자동 정렬됨.
+  - Partition by 를 사용하여 그룹별 순위를 부여할 수 있음
+* Dense_rank() : 중복 순위가 존재해도 순차적으로 다음 순위 값을 표시 ex. 1,1,2,3,4..
+ 
+<br>
 
+##### 순번을 매기는 함수 (Over절과 같이 쓰임)
+* ROW_NUMBER() : 순번을 결정할 조건을 OVER절 내부 ORDER BY절에 준다
+  - Partition by 를 OVER절 내에 사용하여 그룹별 순번를 부여할 수 있다
+  - 추가적으로 SELECT절에 ORDER BY를 사용할 경우, 함수 내에 order by 기준으로 정렬되어 순번이 매겨지고 최종적으로 select절의 order by 기준으로 조회되어 표시된다.
+```
+ SELECT 컬럼명1, ROW_NUMBER() OVER(PARTITION BY 컬럼명1 ORDER BY 컬럼명2 DESC) AS rownum
+ FROM 테이블명
+ WHERE 조건식
+```
 
+##### 이전/이후 값 찾는 함수
+* LAG(컬럼명,[찾을 행의 위치(기본값 1)][값이 없을경우 나타낼 기본값]) OVER([PARTITION BY 컬럼명] ORDER BY 컬럼명) : 이전 값 찾는 함수
+* LEAD(컬럼명,[찾을 행의 위치(기본값 1)][값이 없을경우 나타낼 기본값]) OVER([PARTITION BY 컬럼명] ORDER BY 컬럼명) : 이후 값 찾는 함수
+```
+ SELECT 컬럼명1, LAG(컬럼명1,2,999) OVER(PARTITION BY 컬럼명2 ORDER BY 컬럼명 ASC)
+ FROM 테이블명
+ WHERE 조건절
+ # 컬럼명2 그룹에서 현재 행을 중심으로 2번째 이전 행의 컬럼명1 값을 표시하고 없을 경우 기본값 999를 표시한다
+```
+<br>
 
+##### 조건에 따른 결과 반환 함수
+> WHERE절에도 사용할 수 있음 <br>
+> 인덱스 컬럼에 사용시 쿼리문의 속도에 영향을 미침(단순 필터링 용도로만 사용할 것)
+* IF문식의 CASE WHEN
+  ```
+  SELECT 컬럼명1, 컬럼명2,
+         CASE WHEN 비교연산자 조건문 [AND/OR 비교연산자 조건문]
+         THEN '조건문이 참일때 결과값'
+         [ELSE '조건문이 거짓일때 결과값']  #else가 생략됐을 때, 거짓인 경우 null 반환
+         END
+  FROM 테이블명
+  WHERE 조건식
+  ```
+* Switch문식의 CASE WHEN
+  ```
+  SELECT 컬럼명1, 컬럼명2,
+         CASE 컬럼명1
+          WHEN 단일 값1 THEN '값1일때 결과값'
+          WHEN 단일 값2 THEN '값2일때 결과값'
+         [ELSE '거짓일때 결과값']  #else가 생략됐을 때, 거짓인 경우 null 반환
+         END
+  FROM 테이블명
+  WHERE 조건식
+  ```
